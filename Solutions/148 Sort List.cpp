@@ -10,17 +10,16 @@ class Solution {
 public:
     ListNode* sortList(ListNode* head) {
 
-            
         ListNode *current = head, *tail = NULL;
         ListNode *current1 = NULL, *current2 = NULL;
         int n = 0, len1, len2;
 
-        while(current){
+        while (current){
             n++;
             current = current->next;
         }
 
-        for(int i = 1; i < n; i *= 2){
+        for (int i = 1; i < n; i *= 2){
             current = head;
             head = NULL;
             tail = NULL;
@@ -30,12 +29,16 @@ public:
                 len2 = min(n - j - i, i);
 
                 current1 = current;
-                for (int g = 0; g < i; g++){
+                for (int g = 0; g < len1; g++){
                     current = current->next;
                 }
                 current2 = current;
+                for (int g = 0; g < len2; g++){
+                    current = current->next;
+                }
 
-                while(len1 + len2){
+
+                while (len1 + len2){
                     if (len2 > 0 && (len1 == 0 || current1->val > current2->val)){
                         if (head == NULL) head = tail = current2;
                         else tail->next = current2;
@@ -52,7 +55,7 @@ public:
                     }
                 }
 
-                tail->next = NULL;
+                tail->next = current;
 
             }
 
